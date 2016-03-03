@@ -5,12 +5,9 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
-    -->
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -22,17 +19,24 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.1/material.blue-pink.min.css">
     <script defer src="https://code.getmdl.io/1.1.1/material.min.js"></script>
+    <link rel="stylesheet" href="https://i.icomoon.io/public/temp/72b8c133bf/SnapPark/style.css">
 
     <!-- your app's js -->
     <script src="src/app.js"></script>
     <script src="src/controllers.js"></script>
     <script src="src/services.js"></script>
+
+    <!-- nav -->
+    <script src="src/nav/tabs/tabs.js"></script>
+    <script src="src/nav/tabs/tabs.controller.js"></script>
+
   </head>
+
   <body ng-app="snapApp">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-stable">
+    <ion-nav-bar class="bar bar-header bar-positive">
       <ion-nav-back-button>
       </ion-nav-back-button>
     </ion-nav-bar>
