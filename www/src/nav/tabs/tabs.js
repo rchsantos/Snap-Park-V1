@@ -17,12 +17,12 @@ snapApp
 
       // Each tab has its own nav history stack:
 
-      .state('tab.dash', {
-        url: '/dash',
+      .state('tab.home', {
+        url: '/home',
         views: {
           'tab-dash': {
-            templateUrl: 'templates/tab-dash.html',
-            controller: 'DashCtrl'
+            templateUrl: 'templates/tab-home.html',
+            controller: 'HomeCtrl as home'
           }
         }
       })

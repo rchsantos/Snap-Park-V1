@@ -15,13 +15,40 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
-$calm:                            #4A90E2 !default;
+// Imports
+
+@import "snap-park-fonts/fonts-snap";
+
+// Fonts SnapPark
+.icon-icon-position, .icon-icon-time {
+  position: relative;
+  top: 10px;
+  font-size: 29px;
+}
 
 // HomePage
 .home {
   text-align: center;
   img {
     width: 50.75%;
+  }
+
+  h1 {
+    margin-bottom: 0;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: #4A90E2;
+  }
+
+  span {
+    position: relative;
+    top: -4px;
+    left: -72.3px;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 18px;
+    font-style: italic;
+    color: #4A90E2;
   }
 }
 
