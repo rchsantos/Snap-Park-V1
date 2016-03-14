@@ -1,5 +1,5 @@
 
-snapApp
+angular.module('snapApp')
   .controller('DashCtrl', function($scope) {})
 
   .controller('ChatsCtrl', function($scope, Chats) {

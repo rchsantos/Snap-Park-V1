@@ -1,11 +1,15 @@
-<ion-view view-title="Dashboard">
-  <ion-content class="padding">
-    <div class="row responsive-sm home">
-      <div class="col col-center">
+<ion-view class="has-header" view-title="Welcome">
+  <ion-content class="padding" scroll="false">
+    <div class="row responsive-sm home row-center">
+      <div class="col col-bottom">
+        <h1></h1>
         <img src="img/logo.svg" alt="">
-        <h1>SnapPark</h1>
-        <span>city of lakes</span>
+        <h1>{{ home.title }}</h1>
+        <span>{{ home.discript }}</span>
       </div>
     </div>
   </ion-content>
 </ion-view>
+
+
+

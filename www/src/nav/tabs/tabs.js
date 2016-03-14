@@ -1,5 +1,4 @@
-snapApp
-
+angular.module('snapApp')
   .config(function($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
@@ -19,10 +18,13 @@ snapApp
 
       .state('tab.home', {
         url: '/home',
+        data:{
+          title:"Accueil"
+        },
         views: {
-          'tab-dash': {
+          'tab-home': {
             templateUrl: 'templates/tab-home.html',
-            controller: 'HomeCtrl as home'
+            controller: 'homeCtrl as home'
           }
         }
       })
@@ -57,6 +59,6 @@ snapApp
       });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/home');
 
   });
