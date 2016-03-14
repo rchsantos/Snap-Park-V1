@@ -29,12 +29,15 @@ angular.module('snapApp')
         }
       })
 
-      .state('tab.chats', {
-        url: '/chats',
+      .state('tab.maps', {
+        url: '/maps',
+        data:{
+          title:"Position"
+        },
         views: {
-          'tab-chats': {
-            templateUrl: 'templates/tab-chats.html',
-            controller: 'ChatsCtrl'
+          'tab-maps': {
+            templateUrl: 'templates/tab-maps.html',
+            controller: 'mapsCtrl as maps'
           }
         }
       })
