@@ -30,30 +30,30 @@ angular.module('snapApp')
       console.log('position Latitude: ' + positionsLat);
       console.log('position Longitude: ' + positionLon);
 
-      //var btnMarker = document.getElementsByClassName('mdl-button');
+      var btnMarker = document.getElementsByClassName('mdl-button');
 
+      vm.btnMarker = function () {
+        console.log('test click');
+      };
 
-        //get Marker until the map is loaded
+      //get Marker until the map is loaded
         google.maps.event.addListenerOnce(vm.map, 'idle', function(){
 
-          var marker = new google.maps.Marker({
-            map: vm.map,
-            animation: google.maps.Animation.DROP,
-            position: latLng
-          });
-
-          var infoWindow = new google.maps.InfoWindow({
-            content: "Here I am!"
-          });
-
-          vm.btnMarker = function () {
-            google.maps.event.addListener(marker, 'click', function () {
-              infoWindow.open(vm.map, marker);
-            });
-          }
-
+        var marker = new google.maps.Marker({
+          map: vm.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
         });
 
+        var infoWindow = new google.maps.InfoWindow({
+          content: "Here I am!"
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+          infoWindow.open(vm.map, marker);
+        });
+
+      });
 
     }, function(error){
       console.log("Could not get location");
