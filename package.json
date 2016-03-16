@@ -8,6 +8,7 @@
     "gulp-minify-css": "^0.3.0",
     "gulp-rename": "^1.2.0",
     "gulp-sass": "^2.0.4",
+    "lodash": "^4.6.1",
     "ng-cordova": "^0.1.24-alpha"
   },
   "devDependencies": {
@@ -19,6 +20,7 @@
     "com.ionic.keyboard"
   ],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    "android"
   ]
 }

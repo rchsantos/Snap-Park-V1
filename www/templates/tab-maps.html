@@ -1,5 +1,16 @@
-<ion-view view-title="Maps">
-  <ion-content class="has-header" scroll="false">
-    <map on-create="mapCreated(map)"></map>
+<ion-view view-title="My position">
+  <ion-content>
+    <div id="map" data-tap-disabled="true"></div>
+    <!-- Colored FAB button with ripple -->
+    <button ng-click="btnMarker()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+      <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
+    </button>
   </ion-content>
 </ion-view>
+
+<!--<ion-view>
+  <ion-content class="has-header" scroll="false" data-tap-disabled="true">
+    <map on-create="mapCreated(map)"></map>
+  </ion-content>
+</ion-view>-->
+
