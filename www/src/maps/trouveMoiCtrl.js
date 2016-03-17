@@ -1,62 +1,105 @@
+'use strict';
+
 angular.module('snapApp')
 
-  .controller('TrouveMoiCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading) {
+  .controller('TrouveMoiCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $timeout) {
 
     var vm = this;
 
     // Options map
     var options = {
-      timeout: 500,
-      enableHighAccuracy: true
+      timeout: 500
+      //enableHighAccuracy: true
     };
 
+    // Setup the loader
+    vm.loading = $ionicLoading.show({
+      content: 'Loading',
+      animation: 'fade-in',
+      showBackdrop: true,
+      maxWidth: 200,
+      showDelay: 0
+    });
+
     // init maps geolocation
-    $cordovaGeolocation.getCurrentPosition(options).then(function(position){
+    $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
+
+      /*
+      **
+      ** INITIALIZATION DES VARIABLES
+      **
+      */
 
       var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      // Finalize le loader
+      $ionicLoading.hide();
 
       // display the position curency
       var positionsLat = position.coords.latitude;
       var positionLon = position.coords.longitude;
 
+      // Options du map
       var mapOptions = {
         center: latLng,
         zoom: 16,
+        disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
 
+      var infoWindow = new google.maps.InfoWindow({
+        content: "Here I am !",
+        animation: google.maps.Animation.DROP
+      });
+
       vm.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
+      // Affichage du positionement
       console.log('position Latitude: ' + positionsLat);
       console.log('position Longitude: ' + positionLon);
 
+
       var btnMarker = document.getElementsByClassName('mdl-button');
 
-      vm.btnMarker = function () {
-        console.log('test click');
-      };
+          vm.btnMarker = function () {
+            var marker = new google.maps.Marker({
+              map: vm.map,
+              animation: google.maps.Animation.DROP,
+              position: latLng
+            });
 
-      //get Marker until the map is loaded
-        google.maps.event.addListenerOnce(vm.map, 'idle', function(){
+            $timeout(function(){
+              infoWindow.open(vm.map, marker);
+            }, 500);
 
-        var marker = new google.maps.Marker({
-          map: vm.map,
-          animation: google.maps.Animation.DROP,
-          position: latLng
-        });
 
-        var infoWindow = new google.maps.InfoWindow({
-          content: "Here I am!"
-        });
+            console.log('Position Marker: ' + marker.position);
+          };
 
-        google.maps.event.addListener(marker, 'click', function () {
-          infoWindow.open(vm.map, marker);
-        });
+          //document.addEventListener('btnMarker', 'click', function() {
+           // console.log('#### click ####');
+          //);
 
-      });
+          //get Marker until the map is loaded
+          /* google.maps.event.addListenerOnce(vm.map, 'idle', function(){
+            var marker = new google.maps.Marker({
+              map: vm.map,
+              animation: google.maps.Animation.DROP,
+              position: latLng
+            });
 
+            var infoWindow = new google.maps.InfoWindow({
+              content: "Here I am!"
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+              infoWindow.open(vm.map, marker);
+            });
+
+          }); */
     }, function(error){
-      console.log("Could not get location");
+      google.maps.event.addDomListener(window, 'load');
+      console.log('Unable to get location: ' + error.message);
     });
 
 

@@ -13,6 +13,7 @@ angular.module('snapApp')
             zoom: 16,
             mapTypeId: google.maps.MapTypeId.ROADMAP
           };
+
           var map = new google.maps.Map($element[0], mapOptions);
 
           $scope.onCreate({map: map});
