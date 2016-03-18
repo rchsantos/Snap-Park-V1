@@ -5,8 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('snapApp', ['ionic', 'ngCordova'])
-  .constant('FirebaseUrl', 'https://snappark.firebaseio.com/')
+angular.module('snapApp', ['ionic', 'firebase', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
