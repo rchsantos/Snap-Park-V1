@@ -1,14 +1,15 @@
 angular.module('snapApp')
 
-  .controller('TrouveMoiCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $timeout, mapsProvider) {
+  .controller('trouveMoiCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $timeout, mapsProvider, $rootScope) {
 
     var vm = this;
 
     // Options map
     var options = {
-      timeout: 500
-      //enableHighAccuracy: true
+      timeout: 500,
+      enableHighAccuracy: false
     };
+
 
     // Setup the loader
     vm.loading = $ionicLoading.show({
@@ -19,16 +20,27 @@ angular.module('snapApp')
       showDelay: 0
     });
 
+
+
+    // Options du map
+     var mapOptions = {
+      center: { lat: 46.204677, lng: 6.143106 },
+      zoom: 16,
+      disableDefaultUI: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+
     // init maps geolocation
     $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
 
       /*
-      **
-      ** INITIALIZATION DES VARIABLES
-      **
-      */
+       **
+       ** INITIALIZATION DES VARIABLES
+       **
+       */
 
-      var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+      vm.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
 
       // Finalize le loader
       $ionicLoading.hide();
@@ -37,13 +49,7 @@ angular.module('snapApp')
       var positionsLat = position.coords.latitude;
       var positionLon = position.coords.longitude;
 
-      // Options du map
-      var mapOptions = {
-        center: latLng,
-        zoom: 16,
-        disableDefaultUI: true,
-        mapTypeId: google.maps.MapTypeId.WALKING
-      };
+
 
       var infoWindow = new google.maps.InfoWindow({
         content: "Here I am !",
@@ -64,141 +70,122 @@ angular.module('snapApp')
 
       var btnMarker = document.getElementsByClassName('mdl-button');
 
-          vm.btnMarker = function () {
-            var marker = new google.maps.Marker({
-              map: vm.map,
-              animation: google.maps.Animation.DROP,
-              position: latLng
-            });
-
-            $timeout(function(){
-              infoWindow.open(vm.map, marker);
-            }, 500);
-
-
-            console.log('Position Marker: ' + marker.position);
-          };
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-
-        directionsService.route({
-          origin: {lat: positionsLat, lng: positionLon},  // Haight.
-          destination: {lat: 37.768, lng: -122.511},  // Ocean Beach.
-          // Note that Javascript allows us to access the constant
-          // using square brackets and a string value as its
-          // "property."
-
-
-          travelMode: google.maps.TravelMode.Walking
-
-
-        }, function(response, status) {
-          if (status == google.maps.DirectionsStatus.OK) {
-            directionsDisplay.setDirections(response);
-            console.log(origin);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
+      /*vm.btnMarker = function () {
+        var marker = new google.maps.Marker({
+          map: vm.map,
+          animation: google.maps.Animation.DROP,
+          position: latLng
         });
 
-      }
+        $timeout(function(){
+          infoWindow.open(vm.map, marker);
+        }, 500);
 
 
-          //document.addEventListener('btnMarker', 'click', function() {
-           // console.log('#### click ####');
-          //);
+        console.log('Position Marker: ' + marker.position);
+      };*/
 
-          //get Marker until the map is loaded
-          /* google.maps.event.addListenerOnce(vm.map, 'idle', function(){
-            var marker = new google.maps.Marker({
-              map: vm.map,
-              animation: google.maps.Animation.DROP,
-              position: latLng
-            });
 
-            var infoWindow = new google.maps.InfoWindow({
-              content: "Here I am!"
-            });
 
-            google.maps.event.addListener(marker, 'click', function () {
-              infoWindow.open(vm.map, marker);
-            });
 
-          }); */
+
     }, function(error){
       google.maps.event.addDomListener(window, 'load');
       console.log('Unable to get location: ' + error.message);
     });
 
-    /*function initMap() {
-      var directionsDisplay = new google.maps.DirectionsRenderer;
-      var directionsService = new google.maps.DirectionsService;
+    function calculateRoute(from, to, $rootScope) {
 
-      directionsDisplay.setMap(map);
 
-      calculateAndDisplayRoute(directionsService, directionsDisplay);
-      document.getElementById('mode').addEventListener('change', function () {
-        calculateAndDisplayRoute(directionsService, directionsDisplay);
-      });
+
+      var directionsService = new google.maps.DirectionsService();
+
+      var directionsRequest = {
+        origin: from,
+        destination: to,
+        travelMode: google.maps.DirectionsTravelMode.DRIVING,
+        unitSystem: google.maps.UnitSystem.METRIC
+      };
+
+      directionsService.route(
+        directionsRequest,
+        function(response, status)
+        {
+          if (status == google.maps.DirectionsStatus.OK)
+          {
+            new google.maps.DirectionsRenderer({
+              map: vm.map,
+              directions: response
+            });
+          }
+          else
+            $("#error").append("Unable to retrieve your route<br />");
+        }
+      );
+
+      vm.btnMarker = function () {
+       var marker = new google.maps.Marker({
+       map: vm.map,
+       animation: google.maps.Animation.DROP,
+       position: latLng
+       });
+
+       $timeout(function(){
+       infoWindow.open(vm.map, marker);
+       }, 500);
+
+
+       console.log('Position Marker: ' + marker.position);
+       };
     }
 
-    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-      var selectedMode = document.getElementById('mode').value;
-      directionsService.route({
-        origin: {lat: 37.77, lng: -122.447},  // Haight.
-        destination: {lat: 37.768, lng: -122.511},  // Ocean Beach.
-        // Note that Javascript allows us to access the constant
-        // using square brackets and a string value as its
-        // "property."
-        travelMode: google.maps.TravelMode[selectedMode]
-      }, function(response, status) {
-        if (status == google.maps.DirectionsStatus.OK) {
-          directionsDisplay.setDirections(response);
-        } else {
-          window.alert('Directions request failed due to ' + status);
-        }
-      });
-    }*/
 
+
+
+    $(document).ready(function() {
+      // If the browser supports the Geolocation API
+      if (typeof navigator.geolocation == "undefined") {
+        $("#error").text("Your browser doesn't support the Geolocation API");
+        return;
+      }
+
+
+      $("#from-link, #to-link").click(function(event) {
+
+        event.preventDefault();
+
+        var addressId = this.id.substring(0, this.id.indexOf("-"));
+
+        navigator.geolocation.getCurrentPosition(function(position) {
+
+          var geocoder = new google.maps.Geocoder();
+
+          geocoder.geocode({
+                "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+              },
+              function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK)
+                  $("#" + addressId).val(results[0].formatted_address);
+                else
+                  $("#error").append("Unable to retrieve your address<br />");
+              });
+          },
+          function(positionError){
+            $("#error").append("Error: " + positionError.message + "<br />");
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 10 * 1000 // 10 seconds
+          });
+      });
+
+      $("#calculate-route").submit(function(event) {
+        event.preventDefault();
+        calculateRoute($("#from").val(), $("#to").val());
+      });
+    });
 
   });
 
 
-/*.controller('TrouveMoiCtrl', function ($scope, $ionicLoading) {
-  var vm = this;
 
-  vm.test = "test";
-  console.log(vm.test);
-
-
-  $scope.mapCreated = function(map) {
-    $scope.map = map;
-    $scope.centerOnMe();
-  };
-
-  $scope.centerOnMe = function () {
-    console.log("Centering");
-    if (!$scope.map) {
-      return;
-    }
-
-    $scope.loading = $ionicLoading.show({
-      content: 'Getting current location...',
-      showBackdrop: false
-    });
-
-    navigator.geolocation.getCurrentPosition(function (pos) {
-      console.log('Got pos', pos);
-
-      console.log('lat', pos.coords.latitude);
-      console.log('lon', pos.coords.longitude);
-      $scope.map.setCenter(
-        new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude)
-      );
-      $ionicLoading.hide();
-    }, function (error) {
-      alert('Unable to get location: ' + error.message);
-    });
-  };
-
-});*/

@@ -37,7 +37,7 @@ angular.module('snapApp')
         views: {
           'tab-map': {
             templateUrl: 'templates/tab-maps.html',
-            controller: 'TrouveMoiCtrl as map'
+            controller: 'trouveMoiCtrl as map'
           }
         }
       })

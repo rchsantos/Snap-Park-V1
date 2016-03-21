@@ -1,10 +1,30 @@
 <ion-view view-title="My position">
   <ion-content>
-    <div id="map" data-tap-disabled="true" scroll="false"></div>
-    <!-- Colored FAB button with ripple -->
-    <button ng-click="map.btnMarker()" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-      <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
-    </button>
+
+    <!-- Initialization Map-->
+    <div id="map"></div>
+
+
+
+    <form id="calculate-route" name="calculate-route" action="#" method="get">
+      <label for="from">From:</label>
+      <input type="text" id="from" name="from" required="required" placeholder="An address" size="30" />
+      <button ng-click="map.btnMarker()" id="from-link" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+        <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
+      </button>
+      <!--<a  href="#">Get my position</a>-->
+      <br />
+
+      <label for="to">To:</label>
+      <input type="text" id="to" name="to" required="required" placeholder="Another address" size="30" />
+      <a id="to-link" href="#">Get my position</a>
+      <br />
+
+      <input type="submit" />
+      <input type="reset" />
+    </form>
+
+    <p id="error"></p>
   </ion-content>
 </ion-view>
 

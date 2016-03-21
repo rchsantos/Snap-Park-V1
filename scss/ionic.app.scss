@@ -19,6 +19,11 @@ $dark:                            #444 !default;
 
 @import "snap-park-fonts/fonts-snap";
 
+form {
+  position: relative;
+  top: -29em;
+}
+
 // Fonts SnapPark
 .icon-icon-position, .icon-icon-time {
   position: relative;

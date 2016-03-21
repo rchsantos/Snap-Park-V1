@@ -41,6 +41,10 @@ i {
 .icon-icon-time:before {
   content: ""; }
 
+form {
+  position: relative;
+  top: -29em; }
+
 .icon-icon-position, .icon-icon-time {
   position: relative;
   top: 10px;
