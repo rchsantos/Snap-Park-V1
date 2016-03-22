@@ -20,8 +20,17 @@ $dark:                            #444 !default;
 @import "snap-park-fonts/fonts-snap";
 
 form {
-  position: relative;
-  top: -29em;
+  position: absolute;
+  top: -0.1em;
+  padding: 1em !important;
+  width: 100%;
+  background-color: white;
+
+  input {
+    width: 100%;
+    overflow: hidden;
+  }
+
 }
 
 // Fonts SnapPark
@@ -69,9 +78,10 @@ form {
 
 .mdl-button {
 
+  position: relative;
   float: right;
-  top: -4em;
-  margin-right: 2em !important;
+  top: -8.3em;
+  margin-right: 0.5em !important;
 
   i {
 

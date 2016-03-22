@@ -42,8 +42,14 @@ i {
   content: ""; }
 
 form {
-  position: relative;
-  top: -29em; }
+  position: absolute;
+  top: -0.1em;
+  padding: 1em !important;
+  width: 100%;
+  background-color: white; }
+  form input {
+    width: 100%;
+    overflow: hidden; }
 
 .icon-icon-position, .icon-icon-time {
   position: relative;
@@ -77,9 +83,10 @@ form {
   height: 100%; }
 
 .mdl-button {
+  position: relative;
   float: right;
-  top: -4em;
-  margin-right: 2em !important; }
+  top: -8.3em;
+  margin-right: 0.5em !important; }
   .mdl-button i img {
     width: 90%; }
 

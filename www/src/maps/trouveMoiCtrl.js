@@ -31,30 +31,11 @@ angular.module('snapApp')
     };
 
     // init maps geolocation
-    $cordovaGeolocation.getCurrentPosition(options).then(function(position) {
-
-      /*
-       **
-       ** INITIALIZATION DES VARIABLES
-       **
-       */
-
-      vm.latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
 
       // Finalize le loader
       $ionicLoading.hide();
 
-      // display the position curency
-      var positionsLat = position.coords.latitude;
-      var positionLon = position.coords.longitude;
-
-
-
-      var infoWindow = new google.maps.InfoWindow({
-        content: "Here I am !",
-        animation: google.maps.Animation.DROP
-      });
 
       var directionsDisplay = new google.maps.DirectionsRenderer;
       var directionsService = new google.maps.DirectionsService;
@@ -63,36 +44,9 @@ angular.module('snapApp')
 
       directionsDisplay.setMap(vm.map);
 
-      // Affichage du positionement
-      console.log('position Latitude: ' + positionsLat);
-      console.log('position Longitude: ' + positionLon);
-
 
       var btnMarker = document.getElementsByClassName('mdl-button');
 
-      /*vm.btnMarker = function () {
-        var marker = new google.maps.Marker({
-          map: vm.map,
-          animation: google.maps.Animation.DROP,
-          position: latLng
-        });
-
-        $timeout(function(){
-          infoWindow.open(vm.map, marker);
-        }, 500);
-
-
-        console.log('Position Marker: ' + marker.position);
-      };*/
-
-
-
-
-
-    }, function(error){
-      google.maps.event.addDomListener(window, 'load');
-      console.log('Unable to get location: ' + error.message);
-    });
 
     function calculateRoute(from, to, $rootScope) {
 
@@ -123,67 +77,46 @@ angular.module('snapApp')
         }
       );
 
-      vm.btnMarker = function () {
-       var marker = new google.maps.Marker({
-       map: vm.map,
-       animation: google.maps.Animation.DROP,
-       position: latLng
-       });
-
-       $timeout(function(){
-       infoWindow.open(vm.map, marker);
-       }, 500);
-
-
-       console.log('Position Marker: ' + marker.position);
-       };
     }
 
 
-
-
     $(document).ready(function() {
-      // If the browser supports the Geolocation API
-      if (typeof navigator.geolocation == "undefined") {
-        $("#error").text("Your browser doesn't support the Geolocation API");
-        return;
-      }
 
 
-      $("#from-link, #to-link").click(function(event) {
+        $("#from-link, #to-link").click(function (event) {
 
-        event.preventDefault();
+          event.preventDefault();
 
-        var addressId = this.id.substring(0, this.id.indexOf("-"));
+          var addressId = this.id.substring(0, this.id.indexOf("-"));
 
-        navigator.geolocation.getCurrentPosition(function(position) {
+          navigator.geolocation.getCurrentPosition(function (position) {
 
-          var geocoder = new google.maps.Geocoder();
+              var geocoder = new google.maps.Geocoder();
 
-          geocoder.geocode({
-                "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
-              },
-              function(results, status) {
-                if (status == google.maps.GeocoderStatus.OK)
-                  $("#" + addressId).val(results[0].formatted_address);
-                else
-                  $("#error").append("Unable to retrieve your address<br />");
-              });
-          },
-          function(positionError){
-            $("#error").append("Error: " + positionError.message + "<br />");
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 10 * 1000 // 10 seconds
-          });
+              geocoder.geocode({
+                  "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+                },
+                function (results, status) {
+                  if (status == google.maps.GeocoderStatus.OK)
+                    $("#" + addressId).val(results[0].formatted_address);
+                  else
+                    $("#error").append("Unable to retrieve your address<br />");
+                });
+            },
+            function (positionError) {
+              $("#error").append("Error: " + positionError.message + "<br />");
+            },
+            {
+              enableHighAccuracy: true,
+              timeout: 10 * 1000 // 10 seconds
+            });
+        });
+
+        $("#calculate-route").submit(function (event) {
+          event.preventDefault();
+          calculateRoute($("#from").val(), $("#to").val());
+        });
       });
-
-      $("#calculate-route").submit(function(event) {
-        event.preventDefault();
-        calculateRoute($("#from").val(), $("#to").val());
-      });
-    });
 
   });
 
