@@ -30,6 +30,12 @@ angular.module('snapApp')
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
+    //Info Window
+    var infoWindow = new google.maps.InfoWindow({
+      content: "Here I am !",
+      animation: google.maps.Animation.DROP
+    });
+
     // init maps geolocation
 
 
@@ -87,7 +93,9 @@ angular.module('snapApp')
 
           event.preventDefault();
 
+          // Address google maps
           var addressId = this.id.substring(0, this.id.indexOf("-"));
+
 
           navigator.geolocation.getCurrentPosition(function (position) {
 
@@ -97,11 +105,44 @@ angular.module('snapApp')
                   "location": new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
                 },
                 function (results, status) {
-                  if (status == google.maps.GeocoderStatus.OK)
+
+
+
+
+
+
+                  if (status == google.maps.GeocoderStatus.OK) {
+
+                    console.log('Enter in Geocoder');
+
+                    var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+                    // Add Marker and center user
+                    var marker = new google.maps.Marker({
+                      map: vm.map,
+                      animation: google.maps.Animation.DROP,
+                      position: latLng
+
+                    });
+
+                    // Marker
+                    $timeout(function(){
+                      console.log('Enter in Marker');
+                      infoWindow.open(vm.map, marker);
+                    }, 500);
+
+                    console.log('Position Marker: ' + marker.position);
+
+                    $('#from-link').hide();
                     $("#" + addressId).val(results[0].formatted_address);
-                  else
+
+
+
+                  } else
                     $("#error").append("Unable to retrieve your address<br />");
                 });
+
+
             },
             function (positionError) {
               $("#error").append("Error: " + positionError.message + "<br />");
@@ -110,6 +151,8 @@ angular.module('snapApp')
               enableHighAccuracy: true,
               timeout: 10 * 1000 // 10 seconds
             });
+
+
         });
 
         $("#calculate-route").submit(function (event) {

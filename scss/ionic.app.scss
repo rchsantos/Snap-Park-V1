@@ -31,6 +31,18 @@ form {
     overflow: hidden;
   }
 
+  row {
+    col {
+      text-align: center;
+
+    }
+  }
+  button {
+    float: none !important;
+    top: 0 !important;
+  }
+
+
 }
 
 // Fonts SnapPark

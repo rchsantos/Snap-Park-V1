@@ -16,20 +16,18 @@
           <input type="text" id="to" name="to" required="required" placeholder="Another address" size="30" />
         </div>
       </div>
-
-
-
-      <!--<a  href="#">Get my position</a>-->
-
-
-      <a id="to-link" href="#">Get my position</a>
-      <br />
-      <!-- Accent-colored flat button -->
-      <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">
-        submit
-      </button>
-      <!--<input type="submit" />-->
-      <input type="reset" />
+      <div class="row">
+        <div class="col col-50" style="text-align: center">
+          <button type="submit" class="mdl-button mdl-js-button mdl-button--accent">
+            submit
+          </button>
+        </div>
+        <div class="col col-50" style="text-align: center">
+          <button type="reset" class="mdl-button mdl-js-button mdl-button--accent">
+            reset
+          </button>
+        </div>
+      </div>
     </form>
     <button ng-click="map.btnMarker();" id="from-link" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
       <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
@@ -37,10 +35,4 @@
     <p id="error"></p>
   </ion-content>
 </ion-view>
-
-<!--<ion-view>
-  <ion-content class="has-header" scroll="false" data-tap-disabled="true">
-    <map on-create="mapCreated(map)"></map>
-  </ion-content>
-</ion-view>-->
 

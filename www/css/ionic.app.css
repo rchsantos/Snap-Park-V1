@@ -50,6 +50,11 @@ form {
   form input {
     width: 100%;
     overflow: hidden; }
+  form row col {
+    text-align: center; }
+  form button {
+    float: none !important;
+    top: 0 !important; }
 
 .icon-icon-position, .icon-icon-time {
   position: relative;
