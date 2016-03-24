@@ -2,6 +2,10 @@ angular.module('snapApp')
 
   .controller('trouveMoiCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $timeout, mapsProvider, $rootScope) {
 
+    console.log('########## Park maps ##########');
+
+
+
     var vm = this;
 
     // Options map
@@ -35,6 +39,7 @@ angular.module('snapApp')
       content: "Here I am !",
       animation: google.maps.Animation.DROP
     });
+
 
     // init maps geolocation
 
@@ -106,34 +111,38 @@ angular.module('snapApp')
                 },
                 function (results, status) {
 
-
-
-
-
-
                   if (status == google.maps.GeocoderStatus.OK) {
 
                     console.log('Enter in Geocoder');
 
                     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                    var marker;
 
-                    // Add Marker and center user
-                    var marker = new google.maps.Marker({
+                    marker = new google.maps.Marker({
                       map: vm.map,
+                      draggable: true,
                       animation: google.maps.Animation.DROP,
                       position: latLng
-
                     });
 
                     // Marker
+                    /*vm.map = new google.maps.Map(document.getElementById('map'), {
+                      zoom: 16,
+                      center: latLng
+                    });*/
                     $timeout(function(){
                       console.log('Enter in Marker');
-                      infoWindow.open(vm.map, marker);
-                    }, 500);
+                      vm.map.setCenter(marker.getPosition());
 
-                    console.log('Position Marker: ' + marker.position);
+                      $timeout(function() {
+                        infoWindow.open(vm.map, marker);
+                      }, 1100);
 
-                    $('#from-link').hide();
+                    }, 1000);
+
+                    console.log('Position Marker: ' + marker.getPosition);
+
+                    //$('#from-link').hide();
                     $("#" + addressId).val(results[0].formatted_address);
 
 

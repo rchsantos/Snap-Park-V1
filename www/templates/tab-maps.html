@@ -29,10 +29,22 @@
         </div>
       </div>
     </form>
-    <button ng-click="map.btnMarker();" id="from-link" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <button ng-click="map.btnMarker();" id="from-link" ng-class="btn-from" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
       <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
     </button>
     <p id="error"></p>
   </ion-content>
 </ion-view>
 
+// Add Marker and center user
+var marker = new google.maps.Marker({
+map: vm.map,
+animation: google.maps.Animation.DROP,
+position: latLng
+});
+
+// Marker
+$timeout(function(){
+console.log('Enter in Marker');
+infoWindow.open(vm.map, marker);
+}, 500);
