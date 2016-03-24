@@ -5,8 +5,9 @@ angular.module('snapApp')
     console.log('########## Park maps ##########');
 
 
-
+    // Variables
     var vm = this;
+    var marker;
 
     // Options map
     var options = {
@@ -113,11 +114,11 @@ angular.module('snapApp')
 
                   if (status == google.maps.GeocoderStatus.OK) {
 
-                    console.log('Enter in Geocoder');
-
+                    // New position
                     var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-                    var marker;
 
+
+                    // Creation new Marker
                     marker = new google.maps.Marker({
                       map: vm.map,
                       draggable: true,
@@ -125,20 +126,16 @@ angular.module('snapApp')
                       position: latLng
                     });
 
-                    // Marker
-                    /*vm.map = new google.maps.Map(document.getElementById('map'), {
-                      zoom: 16,
-                      center: latLng
-                    });*/
+                    // Display the new Marker with infoWindow
                     $timeout(function(){
                       console.log('Enter in Marker');
                       vm.map.setCenter(marker.getPosition());
 
+                      // InfoWindow
                       $timeout(function() {
                         infoWindow.open(vm.map, marker);
-                      }, 1100);
-
-                    }, 1000);
+                      }, 500);
+                    }, 500);
 
                     console.log('Position Marker: ' + marker.getPosition);
 
@@ -151,7 +148,6 @@ angular.module('snapApp')
                     $("#error").append("Unable to retrieve your address<br />");
                 });
 
-
             },
             function (positionError) {
               $("#error").append("Error: " + positionError.message + "<br />");
@@ -160,7 +156,6 @@ angular.module('snapApp')
               enableHighAccuracy: true,
               timeout: 10 * 1000 // 10 seconds
             });
-
 
         });
 
