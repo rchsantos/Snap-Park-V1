@@ -4,7 +4,6 @@ angular.module('snapApp')
 
     console.log('########## Park maps ##########');
 
-
     // Variables
     var vm = this;
     var marker;
@@ -15,7 +14,6 @@ angular.module('snapApp')
       enableHighAccuracy: false
     };
 
-
     // Setup the loader
     vm.loading = $ionicLoading.show({
       content: 'Loading',
@@ -24,8 +22,6 @@ angular.module('snapApp')
       maxWidth: 200,
       showDelay: 0
     });
-
-
 
     // Options du map
      var mapOptions = {
@@ -41,13 +37,10 @@ angular.module('snapApp')
       animation: google.maps.Animation.DROP
     });
 
-
     // init maps geolocation
-
 
       // Finalize le loader
       $ionicLoading.hide();
-
 
       var directionsDisplay = new google.maps.DirectionsRenderer;
       var directionsService = new google.maps.DirectionsService;
@@ -126,6 +119,10 @@ angular.module('snapApp')
                       position: latLng
                     });
 
+                    function clearMarkers() {
+                      setMapOnAll(null);
+                    }
+
                     // Display the new Marker with infoWindow
                     $timeout(function(){
                       console.log('Enter in Marker');
@@ -139,7 +136,12 @@ angular.module('snapApp')
 
                     console.log('Position Marker: ' + marker.getPosition);
 
-                    //$('#from-link').hide();
+                    $('#from-link').removeClass('fadeInLeft');
+                    $('#from-link').addClass('fadeOutRight');
+                    $('#to-link').show().addClass('fadeInLeft');
+
+
+
                     $("#" + addressId).val(results[0].formatted_address);
 
 
@@ -162,10 +164,11 @@ angular.module('snapApp')
         $("#calculate-route").submit(function (event) {
           event.preventDefault();
           calculateRoute($("#from").val(), $("#to").val());
+
+          // Clear Markers Firts positions
+          marker.setMap(null);
+          console.log('Marker Initial deleted');
         });
       });
 
   });
-
-
-

@@ -4,7 +4,7 @@
     <!-- Initialization Map-->
     <div id="map"></div>
 
-    <form id="calculate-route" name="calculate-route" action="#" method="get">
+    <form id="calculate-route" name="calculate-route" action="#" method="get" class="animated slideInDown">
 
       <div class="row">
         <div class="col col-50 ">
@@ -29,7 +29,10 @@
         </div>
       </div>
     </form>
-    <button ng-click="map.btnMarker();" id="from-link" ng-class="btn-from" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <button ng-click="map.btnMarker();" id="from-link" ng-class="btn-from" class="animated fadeInLeft mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+      <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
+    </button>
+    <button ng-click="map.btnMarker();" id="to-link" ng-class="btn-from" style="display:none;" class="animated fadeInLeft mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
       <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
     </button>
     <p id="error"></p>

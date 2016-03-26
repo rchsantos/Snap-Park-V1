@@ -18,6 +18,7 @@ $dark:                            #444 !default;
 // Imports
 
 @import "snap-park-fonts/fonts-snap";
+@import "animate";
 
 form {
   position: absolute;
@@ -92,7 +93,7 @@ form {
 
   position: relative;
   float: right;
-  top: -8.3em;
+  top: -3.3em;
   margin-right: 0.5em !important;
 
   i {
@@ -101,6 +102,16 @@ form {
       width: 90%;
     }
   }
+}
+
+#to-link {
+  margin-right: -2.3em !important;
+}
+
+// Animation button from link
+#from-link.ng-enter {
+  -webkit-animation: fadeInLeft 1s;
+  animation: fadeInLeft 1s;
 }
 
 // The path for our ionicons font files, relative to the built CSS in www/css
