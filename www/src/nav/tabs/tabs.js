@@ -41,12 +41,12 @@ angular.module('snapApp')
           }
         }
       })
-      .state('tab.chat-detail', {
-        url: '/chats/:chatId',
+      .state('tab.countdown', {
+        url: '/countdown',
         views: {
-          'tab-chats': {
-            templateUrl: 'templates/chat-detail.html',
-            controller: 'ChatDetailCtrl'
+          'tab-countdown': {
+            templateUrl: 'templates/tab-countdown.html',
+            controller: 'countdownCtrl as count'
           }
         }
       })

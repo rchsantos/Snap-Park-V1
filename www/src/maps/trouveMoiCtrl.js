@@ -1,6 +1,6 @@
 angular.module('snapApp')
 
-  .controller('trouveMoiCtrl', function ($scope, $state, $cordovaGeolocation, $ionicLoading, $timeout, mapsProvider, $rootScope) {
+  .controller('trouveMoiCtrl', function ($scope, $state, $ionicLoading, $timeout) {
 
     console.log('########## Park maps ##########');
 
@@ -62,7 +62,7 @@ angular.module('snapApp')
       var directionsRequest = {
         origin: from,
         destination: to,
-        travelMode: google.maps.DirectionsTravelMode.DRIVING,
+        travelMode: google.maps.DirectionsTravelMode.WALKING,
         unitSystem: google.maps.UnitSystem.METRIC
       };
 
@@ -136,8 +136,7 @@ angular.module('snapApp')
 
                     console.log('Position Marker: ' + marker.getPosition);
 
-                    $('#from-link').removeClass('fadeInLeft');
-                    $('#from-link').addClass('fadeOutRight');
+                    $('#from-link').removeClass('fadeInLeft').addClass('fadeOutRight');
                     $('#to-link').show().addClass('fadeInLeft');
 
 
