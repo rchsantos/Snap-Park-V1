@@ -41,8 +41,17 @@ angular.module('snapApp')
           }
         }
       })
-      .state('tab.countdown', {
+      .state('tab.countSett', {
         url: '/countdown',
+        views: {
+          'tab-countdown': {
+            templateUrl: 'templates/tab-countdownSett.html',
+            controller: 'countdownCtrl as count'
+          }
+        }
+      })
+      .state('tab.countdown', {
+        url: '/countdown/temps',
         views: {
           'tab-countdown': {
             templateUrl: 'templates/tab-countdown.html',

@@ -2433,7 +2433,7 @@ form {
     width: 50.75%; }
   .home h1 {
     margin-bottom: 0;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-size: 48px;
     font-weight: bold;
     color: #4A90E2; }
@@ -2441,7 +2441,7 @@ form {
     position: relative;
     top: -4px;
     left: -72.3px;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: "Noto Sans", sans-serif;
     font-size: 18px;
     font-style: italic;
     color: #4A90E2; }
@@ -2467,6 +2467,53 @@ form {
 #from-link.ng-enter {
   -webkit-animation: fadeInLeft 1s;
   animation: fadeInLeft 1s; }
+
+.countdown .list li {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.5em;
+  color: #333333; }
+
+.countdown h3 {
+  margin-top: 0.5em !important; }
+
+.countdown .btnStop {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4.4em;
+  width: 113px;
+  height: 113px;
+  background-color: rgba(74, 144, 226, 0.1);
+  border-radius: 50%; }
+  .countdown .btnStop button {
+    position: relative;
+    top: 0.3em;
+    width: 102px;
+    height: 102px;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+    color: #4A90E2;
+    text-transform: uppercase;
+    background-color: rgba(74, 144, 226, 0.1);
+    border-radius: 50%;
+    border: none; }
+
+#countdown {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 194px;
+  height: 194px;
+  background-color: rgba(74, 144, 226, 0.1);
+  border-radius: 50%; }
+  #countdown .time {
+    position: relative;
+    top: 2.6em;
+    font-family: "Roboto", sans-serif;
+    font-size: 2.3em;
+    color: #4A90E2; }
 
 /*!
   Ionicons, v2.0.1

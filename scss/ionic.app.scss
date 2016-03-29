@@ -17,8 +17,19 @@ $dark:                            #444 !default;
 
 // Imports
 
+// Google Fonts
+
 @import "snap-park-fonts/fonts-snap";
 @import "animate";
+
+
+//colors
+
+$text-color : #333333;
+$bleu : #4A90E2;
+$font-primary : 'Noto Sans', sans-serif;
+$font-secondary : 'Roboto', sans-serif;
+
 
 form {
   position: absolute;
@@ -62,20 +73,20 @@ form {
 
   h1 {
     margin-bottom: 0;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: $font-primary;
     font-size: 48px;
     font-weight: bold;
-    color: #4A90E2;
+    color: $bleu;
   }
 
   span {
     position: relative;
     top: -4px;
     left: -72.3px;
-    font-family: 'Noto Sans', sans-serif;
+    font-family: $font-primary;
     font-size: 18px;
     font-style: italic;
-    color: #4A90E2;
+    color: $bleu;
   }
 }
 
@@ -114,9 +125,69 @@ form {
   animation: fadeInLeft 1s;
 }
 
+.countdown {
+  .list {
+    li {
+      font-family: $font-secondary;
+      font-size: 1.5em;
+      color: $text-color;
+    }
+  }
+
+  h3 {
+    margin-top: 0.5em !important;
+  }
+
+  .btnStop {
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4.4em;
+    width: 113px;
+    height: 113px;
+    background-color: rgba(74,144,226,0.1);
+    border-radius: 50%;
+
+    button {
+      position: relative;
+      top: 0.3em;
+      width: 102px;
+      height: 102px;
+      font-family: $font-secondary;
+      font-size: 1.5em;
+      color: $bleu;
+      text-transform: uppercase;
+      background-color: rgba(74,144,226,0.1);
+      border-radius: 50%;
+      border: none;
+    }
+  }
+
+}
+
+#countdown {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 194px;
+  height: 194px;
+  background-color: rgba(74,144,226,0.1);
+  border-radius: 50%;
+
+  .time {
+    position: relative;
+    top: 2.6em;
+    font-family: $font-secondary;
+    font-size: 2.3em;
+    color: $bleu;
+  }
+}
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 
 // Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
+@import "../www/lib/ionic/scss/ionic";

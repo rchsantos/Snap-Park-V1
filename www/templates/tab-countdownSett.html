@@ -1,0 +1,73 @@
+<ion-view view-title="Countdown Settings">
+  <ion-content class="countdown">
+    <h3 class="text-center">{{ count.title }}</h3>
+
+    <ul class="list">
+      <li class="item item-toggle">
+        30 minutes <br>
+        {{ count.thirtyMin}}
+        <label class="toggle toggle-positive">
+          <input ng type="checkbox" ng-model="count.thirtyMin">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        60 minutes <br>
+        {{ count.sixtyMin}}
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="count.sixtyMin">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+      <li class="item item-toggle">
+        90 minutes <br>
+        {{ count.ninetyMin}}
+        <label class="toggle toggle-positive">
+          <input type="checkbox" ng-model="count.ninetyMin">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </li>
+
+      <!-- <li class="item mdl-list__item fadeInLeft">
+        <span class="mdl-list__item-primary-content">
+
+        </span>
+        <span class="mdl-list__item-secondary-action">
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+          </label>
+        </span>
+      </li>
+      <li class="item mdl-list__item fadeInLeft">
+        <span class="mdl-list__item-primary-content">
+
+        </span>
+        <span class="mdl-list__item-secondary-action fadeInLeft">
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+          </label>
+        </span>
+      </li>
+      <li class="item mdl-list__item fadeInLeft">
+        <span class="mdl-list__item-primary-content">
+
+        </span>
+        <span class="mdl-list__item-secondary-action">
+          <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+            <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+          </label>
+        </span>
+      </li>-->
+
+    </ul>
+
+    <button ng-click="count.time();" style="z-index: 9999">Go to</button>
+
+  </ion-content>
+</ion-view>

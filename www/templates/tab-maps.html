@@ -1,11 +1,11 @@
 <ion-view view-title="My position">
-  <ion-content>
+  <ion-content scroll="false">
 
     <!-- Initialization Map-->
     <div id="map"></div>
 
-    <form id="calculate-route" name="calculate-route" action="#" method="get" class="animated slideInDown">
-
+    <form id="calculate-route" name="calculate-route" action="#" method="get" class="animated slideInDown" style="padding-top: 0 !important;">
+      <h6 style="margin-bottom: 0; margin-top: 14px">Formulaire juste pour la DEMO</h6>
       <div class="row">
         <div class="col col-50 ">
           <label for="from" id="lFrom">From:</label>
@@ -29,25 +29,12 @@
         </div>
       </div>
     </form>
-    <button ng-click="map.btnMarker();" id="from-link" ng-class="btn-from" class="animated fadeInLeft mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <button id="from-link" ng-class="btn-from" class="animated fadeInLeft mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
       <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
     </button>
-    <button ng-click="map.btnMarker();" id="to-link" ng-class="btn-from" style="display:none;" class="animated fadeInLeft mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-      <i class="material-icons"><img src="img/icon-park-plus-white.svg" alt="icon add parking"></i>
+    <button id="to-link" ng-class="btn-to" style="display:none;" class="animated fadeInLeft mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+      <i class="ion-navigate"></i>
     </button>
     <p id="error"></p>
   </ion-content>
 </ion-view>
-
-// Add Marker and center user
-var marker = new google.maps.Marker({
-map: vm.map,
-animation: google.maps.Animation.DROP,
-position: latLng
-});
-
-// Marker
-$timeout(function(){
-console.log('Enter in Marker');
-infoWindow.open(vm.map, marker);
-}, 500);
