@@ -17,35 +17,14 @@ angular.module('snapApp')
       $state.go ('tab.countdown');
     };
 
-    //vm.counter = 10;
+    //vm.counter    = 10;
     vm.stopped    = false;
     vm.buttonText ='Stop';
 
 
-    vm.toogle = function () {
-      $state.go('tab.countdown');
-
-      //vm.onTimeout(counter);
-    };
-
-    switch (vm.onTimeout) {
-      case vm.thirtyMin.checked:
-        vm.counter = vm.thirty;
-        break;
-
-      case vm.sixtyMin.checked:
-        vm.counter = vm.sixty;
-        break;
-
-      case vm.ninetyMin.checked:
-        vm.counter = vm.sixty;
-        break;
-
-      default:
-        alert("Désolé, mais il'y à un problem dans le timer");
-    }
 
     vm.onTimeout = function() {
+
       vm.counter --;
 
       timeoutPark = $timeout(vm.onTimeout,1000);
@@ -53,8 +32,6 @@ angular.module('snapApp')
       if (vm.counter <= 0) {
         $timeout.cancel(timeoutPark);
         vm.buttonText = 'Go Back';
-
-        alert('le temps s\'écoule');
 
         vm.goBack = function () {
           $state.go('tab.countdownSett');
@@ -75,25 +52,34 @@ angular.module('snapApp')
       }
 
       vm.stopped = !vm.stopped;
+    }
+
+    vm.tooglethirty = function () {
+
+      if (vm.thirtyMin.checked) {
+        $state.go ('tab.countdown');
+        vm.counter = vm.thirty;
+        console.log(vm.counter);
+        console.log('Time 30 min change ' + vm.thirtyMin.checked);
+
+        vm.onTimeout();
+      }
+
     };
-
-
 
   })
 
 
 
-.filter('formatTimer', function() {
+  .filter('formatTimer', function() {
 
-  return function(input)
+    return function(input)
 
-  {
-    function z(n) {
-      return ( n < 10 ? '0' : '') + n;
-    }
-    var seconds = input % 60;
-    var minutes = Math.floor( input / 60);
-    var hours = Math.floor( minutes / 60);
-    return (z(hours) + ':' + z(minutes) + ':' + z(seconds));
-  };
-});
+    {
+      function z(n) {return (n < 10 ? '0' : '') + n;}
+      var seconds = input % 60;
+      var minutes = Math.floor( input / 60);
+      var hours = Math.floor( minutes / 60);
+      return (z(hours) +':'+z(minutes)+':'+z(seconds));
+    };
+  });

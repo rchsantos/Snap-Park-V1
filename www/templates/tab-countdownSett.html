@@ -7,7 +7,7 @@
         30 minutes <br>
         {{ count.thirtyMin}}
         <label class="toggle toggle-positive">
-          <input ng type="checkbox" ng-model="count.thirtyMin">
+          <input ng-change="count.toogle();" type="checkbox" ng-model="count.thirtyMin.checked">
           <div class="track">
             <div class="handle"></div>
           </div>
@@ -17,7 +17,7 @@
         60 minutes <br>
         {{ count.sixtyMin}}
         <label class="toggle toggle-positive">
-          <input type="checkbox" ng-model="count.sixtyMin">
+          <input ng-change="count.toogle();" type="checkbox" ng-model="count.sixtyMin.checked">
           <div class="track">
             <div class="handle"></div>
           </div>
@@ -27,7 +27,7 @@
         90 minutes <br>
         {{ count.ninetyMin}}
         <label class="toggle toggle-positive">
-          <input type="checkbox" ng-model="count.ninetyMin">
+          <input ng-change="count.toogle();" type="checkbox" ng-model="count.ninetyMin.checked">
           <div class="track">
             <div class="handle"></div>
           </div>
